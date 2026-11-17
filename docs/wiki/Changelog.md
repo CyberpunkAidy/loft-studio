@@ -2,9 +2,9 @@
 
 Every change to the web app, newest first. Each links to its pull request. All were merged into `main` and deployed to Render automatically. Dates are UTC.
 
-## In review
+## 2026-11-17
 
-- **Text messages** ([decision 48](Decisions), [Text Messages](Text-Messages))
+- **Text messages** ([decision 48](Decisions), [Text Messages](Text-Messages), [#47](https://github.com/CyberpunkAidy/loft-studio/pull/47))
   - **Connect Twilio:** Admin → **Text messages**: paste the Account SID and Auth Token, choose the number. Studios pay Twilio for their texts; Loft adds nothing. The page lists what to fill in for A2P 10DLC registration.
   - **Booking texts:** class reminders, a spot opening on the waitlist, and a class the studio cancelled, as well as the email, to members who opted in. Each can be turned off.
   - **Automations by text:** each automation goes by email, text or both, with its own short text and a `{link}` placeholder. Marketing texts end with "Reply STOP to opt out." and go out only from 9 AM to 8 PM studio time.
