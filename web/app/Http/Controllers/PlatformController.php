@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\Referrals;
 use App\Services\StudioBilling;
+use App\Support\MetaPixel;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -79,6 +80,14 @@ class PlatformController extends Controller
     public function privacy(StudioBilling $billing): View
     {
         return view('platform.legal.privacy', $this->legal($billing));
+    }
+
+    /** "Don't share my visits with Meta": the pixel stays off in this browser (decision 49). */
+    public function adsOptOut(): RedirectResponse
+    {
+        return redirect()->to(route('privacy').'#ads')
+            ->withCookie(cookie()->forever(MetaPixel::OPT_OUT_COOKIE, '1'))
+            ->with('success', 'Done: Loft’s pages won’t share your visits with Meta in this browser.');
     }
 
     /** @return array<string, mixed> */

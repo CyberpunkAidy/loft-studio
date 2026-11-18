@@ -27,6 +27,7 @@ Route::get('/', [PlatformController::class, 'home'])->name('home');
 Route::get('/pricing', [PlatformController::class, 'pricing'])->name('pricing');
 Route::get('/terms', [PlatformController::class, 'terms'])->name('terms');
 Route::get('/privacy', [PlatformController::class, 'privacy'])->name('privacy');
+Route::post('/privacy/ads', [PlatformController::class, 'adsOptOut'])->middleware('throttle:20,1')->name('privacy.ads');
 // "Try the demo" (decision 44): the visitor's own copy of the sample studio for a day.
 Route::get('/demo', [DemoController::class, 'show'])->name('demo');
 Route::post('/demo', [DemoController::class, 'store'])->middleware('throttle:demo')->name('demo.store');

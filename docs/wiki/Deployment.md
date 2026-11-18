@@ -28,6 +28,7 @@ Values aren't recorded here. Secrets live only in Render's dashboard.
 |---|---|---|
 | `APP_NAME`, `APP_ENV`, `APP_DEBUG`, `APP_URL`, `LOG_CHANNEL`, `LOG_LEVEL`, `DB_CONNECTION`, `QUEUE_CONNECTION`, `CACHE_STORE`, `SESSION_DRIVER`, `SESSION_SECURE_COOKIE`, `TRUSTED_PROXIES`, `MAIL_FROM_ADDRESS` | `loft-shared` group (Blueprint) | `APP_URL=https://loftstudio.app`, `MAIL_FROM_ADDRESS=hello@mail.loftstudio.app` |
 | `APP_KEY` | `loft-shared` group | Generated once by Render |
+| `META_PIXEL_ID` | Optional, any service | Meta's pixel on the marketing pages ([Home Page](Home-Page#ads)). On in production without it, from `config/loft.php`; set it to another ID, or to empty to turn the pixel off |
 | `DB_URL` | Each service (Blueprint) | From the `loft-db` connection string |
 | `MAIL_MAILER`, `RESEND_API_KEY` | `loft-shared` group, **set in the dashboard** | `MAIL_MAILER=resend`. Left out of the Blueprint so a sync never overwrites them. |
 | `STRIPE_SECRET` | `loft-web` and `loft-housekeeping`, **set in the dashboard** | The same key on both. `sync: false` in the Blueprint. The secret key starts with `sk_`, not `pk_`. Without it on `loft-housekeeping`, shop checkouts and card reader sales nobody finished stay pending and keep their stock, and its logs show `Stripe is not configured. Set STRIPE_SECRET.` |

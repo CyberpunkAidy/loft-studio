@@ -55,6 +55,7 @@
             <li><strong>Videos:</strong> which of the studio’s videos you watched, and on which day.</li>
             <li><strong>Activity and risk scores:</strong> a history of the things above, nightly summaries of your activity at each studio, and, for studios, an “at risk of leaving” score worked out from them with simple rules (for example, not having booked in a while). Studios use these scores to check in with members; they don’t lead to any automatic decision about you.</li>
             <li><strong>Technical information:</strong> your IP address and browser when you sign in, sign a waiver or use the Service, the name of the device you sign in to the app on, and the records our host keeps of requests to the Service.</li>
+            <li><strong>Visits to Loft’s own marketing pages:</strong> on the home page, pricing, the demo page and the page for starting a studio, Meta’s pixel records your visit for Meta (<a href="#ads">below</a>). It isn’t on any studio’s pages or in the app.</li>
             <li><strong>Where a new studio’s visit began:</strong> when you start a studio, the site that linked you to Loft (just its name, like google.com), any campaign tags in that link, and the first page you opened. It’s kept for your visit only, and saved only if you start a studio.</li>
         </ul>
         <h3>From others</h3>
@@ -74,11 +75,11 @@
             <li>to send texts from a studio about your bookings, and its news and offers by text, only if you agreed to each at that studio, and to pass your replies to the studio;</li>
             <li>to keep the Service secure, prevent abuse and fix problems;</li>
             <li>to bill studios for Loft, and to reward studios that bring other studios to Loft;</li>
-            <li>to see which ways of finding Loft work for studios;</li>
+            <li>to see which ways of finding Loft work for studios, and to advertise Loft to people who run studios, using visits to Loft’s own marketing pages (<a href="#ads">below</a>);</li>
             <li>to improve the Service; and</li>
             <li>to meet legal obligations and enforce our terms.</li>
         </ul>
-        <p>We don’t sell your information, and we don’t use it for advertising.</p>
+        <p>We don’t sell your information. Nothing from a studio’s pages or the app, such as your bookings, payments, waivers, family or health answers, is ever used for advertising or shared with advertisers.</p>
     </section>
 
     <section id="bases">
@@ -99,6 +100,7 @@
             <li><strong>Studios you belong to:</strong> their staff see your account details, family, bookings, plans, waivers and check-ins at that studio, and nothing from other studios.</li>
             <li><strong>Service providers</strong> who process information for us under contract: Render (hosting, database and file storage), Resend (sending email), Mux (hosting and streaming videos; it receives your IP address when you watch, with no cookies and no member details), and Stripe (payments).</li>
             <li><strong>Stripe:</strong> payments you make to a studio are processed by Stripe on the studio’s own Stripe account, under Stripe’s privacy policy and the studio’s agreement with Stripe.</li>
+            <li><strong>Meta:</strong> visits to Loft’s own marketing pages, through Meta’s pixel, so we can measure and show ads for Loft (<a href="#ads">below</a>). Meta uses this under its own privacy policy.</li>
             <li><strong>Twilio:</strong> a studio that texts its members does it through its own Twilio account, so Twilio gets your mobile number and each text, under Twilio’s privacy policy and the studio’s agreement with Twilio.</li>
             <li><strong>The law:</strong> when we must, to comply with law or legal process, or to protect someone’s safety or rights.</li>
             <li><strong>A new owner:</strong> if our business is merged or sold, with notice to you.</li>
@@ -107,7 +109,16 @@
 
     <section id="cookies">
         <h2>6. Cookies</h2>
-        <p>Loft uses only the cookies it needs to work: one that keeps you signed in during a visit, one that protects forms from forgery, and, if you choose “remember me”, one that keeps you signed in on that device until you sign out. If you follow a referral link, one more remembers its code for 30 days, so the form for starting a studio can fill it in. We don’t use advertising or analytics cookies, and the video player is set to use none. The mobile app keeps your sign-in in your phone’s secure storage.</p>
+        <p>Loft uses only the cookies it needs to work: one that keeps you signed in during a visit, one that protects forms from forgery, and, if you choose “remember me”, one that keeps you signed in on that device until you sign out. If you follow a referral link, one more remembers its code for 30 days, so the form for starting a studio can fill it in. The video player is set to use none. The mobile app keeps your sign-in in your phone’s secure storage. Loft’s own marketing pages also load Meta’s pixel, which sets an advertising cookie (<a href="#ads">below</a>); a studio’s pages, where members book and pay, never do.</p>
+        <h3 id="ads">Advertising on Loft’s own pages</h3>
+        <p>On loftstudio.app’s home page, pricing page, demo page and the page for starting a studio, Meta’s pixel tells Meta that someone visited, from which browser and IP address, and sets a cookie (<code>_fbp</code>) so Meta can recognise the browser later. When someone starts a studio, the next page tells Meta once that a studio signed up. We use this to measure our ads and show them to people who run studios. Meta may combine it with what it already knows about you, under its own privacy policy. It’s never loaded on a studio’s pages (schedule, booking, payments, waivers, accounts), in the admin, or in the app.</p>
+        <p>It doesn’t load if your browser sends a Global Privacy Control signal, or is set to a time zone in Europe. You can also turn it off for this browser:</p>
+        @if (\App\Support\MetaPixel::optedOut(request()))
+            <p><strong>It’s off for this browser.</strong> Loft’s pages won’t load Meta’s pixel here. Clearing your cookies turns it back on.</p>
+        @else
+            <form method="post" action="{{ route('privacy.ads') }}" class="inline">@csrf<button class="btn btn-secondary btn-small">Don’t share my visits with Meta</button></form>
+        @endif
+        <p>You can also manage the ads Meta shows you in your Meta account’s ad settings, or block third-party cookies in your browser.</p>
     </section>
 
     <section id="keep">
@@ -139,7 +150,7 @@
 
     <section id="us-states">
         <h2>9. US state privacy rights</h2>
-        <p>In the last 12 months we’ve collected the categories of information in section 2: identifiers (such as name, email and IP address), customer records, age (birthdays), commercial information (plans and purchases), internet activity (sign-ins and use of the Service), and sensitive information (account sign-in details, and health information you choose to add). We collect them for the purposes in section 3 and share them only as section 5 describes. We don’t sell or “share” personal information for cross-context behavioural advertising, and we use sensitive information only to provide the Service. Residents of California and other states with privacy laws can ask to know, correct or delete their information, by themselves or through an authorised agent, by emailing <a href="mailto:{{ $email }}">{{ $email }}</a>.</p>
+        <p>In the last 12 months we’ve collected the categories of information in section 2: identifiers (such as name, email and IP address), customer records, age (birthdays), commercial information (plans and purchases), internet activity (sign-ins and use of the Service), and sensitive information (account sign-in details, and health information you choose to add). We collect them for the purposes in section 3 and share them only as section 5 describes. We don’t sell personal information. Visits to Loft’s own marketing pages are shared with Meta for advertising (<a href="#ads">above</a>), which some state laws call “sharing” for cross-context behavioural advertising; nothing else is, and nothing from a studio’s pages or the app. To opt out, use the button in section 6 or a browser that sends Global Privacy Control, which we honour. We use sensitive information only to provide the Service. Residents of California and other states with privacy laws can ask to know, correct or delete their information, by themselves or through an authorised agent, by emailing <a href="mailto:{{ $email }}">{{ $email }}</a>.</p>
     </section>
 
     <section id="children">
