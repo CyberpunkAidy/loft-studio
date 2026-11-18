@@ -73,7 +73,7 @@ return [
         'state' => env('LOFT_LEGAL_STATE', 'Wyoming'),
         'email' => env('LOFT_LEGAL_EMAIL', 'privacy@loftstudio.app'),
         'terms_version' => '2026-11-13',
-        'privacy_version' => '2026-11-13',
+        'privacy_version' => '2026-11-18',
     ],
 
     /*
@@ -109,6 +109,18 @@ return [
     /*
     | Studio URLs are /{slug}. These can't be slugs because the platform uses them.
     */
+    /*
+    |--------------------------------------------------------------------------
+    | Advertising (decision 49)
+    |--------------------------------------------------------------------------
+    | Meta's pixel, on Loft's own marketing pages only (MetaPixel::PAGES): never a studio's pages,
+    | the admin or the app. The ID isn't secret (it's in every page that loads the pixel). On in
+    | production by default; set META_PIXEL_ID empty to turn it off, or to another ID to change it.
+    */
+    'marketing' => [
+        'meta_pixel_id' => env('META_PIXEL_ID', env('APP_ENV') === 'production' ? '1477938097807772' : null),
+    ],
+
     'reserved_slugs' => [
         'admin', 'api', 'app', 'account', 'billing', 'blog', 'css', 'dashboard', 'docs', 'favicon', 'forgot-password',
         'demo', 'help', 'home', 'images', 'img', 'js', 'join', 'login', 'logout', 'mail', 'platform', 'pricing', 'privacy',

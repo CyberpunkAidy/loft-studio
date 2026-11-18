@@ -495,7 +495,7 @@ class TextMessagesTest extends TestCase
 
     public function test_the_privacy_policy_explains_texts(): void
     {
-        $this->get('/privacy')->assertOk()->assertSee('Last updated November 13, 2026')->assertSee('id="texts"', false)
+        $this->get('/privacy')->assertOk()->assertSee('id="texts"', false)
             ->assertSee('Reply <strong>STOP</strong> to any text to stop all texts from that studio', false)
             ->assertSee('We don’t sell or share mobile numbers, or your agreement to texts, with anyone for their own marketing.', false)
             ->assertSee('Twilio gets your mobile number and each text', false);

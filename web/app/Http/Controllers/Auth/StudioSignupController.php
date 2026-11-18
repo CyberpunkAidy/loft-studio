@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Services\Demo\DemoStudios;
 use App\Services\Referrals;
 use App\Services\StudioBilling;
+use App\Support\MetaPixel;
 use App\Support\SignupSource;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -128,6 +129,7 @@ class StudioSignupController extends Controller
 
         return redirect()->route('studio.admin.dashboard', ['studio' => $studio])
             ->with('success', "Welcome to {$studio->name}! Work through the checklist below to start taking bookings.")
+            ->with(MetaPixel::EVENT_FLASH, 'CompleteRegistration') // counted once for Loft's ads (decision 49)
             ->withoutCookie(Referrals::COOKIE);
     }
 

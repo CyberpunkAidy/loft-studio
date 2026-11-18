@@ -47,6 +47,15 @@ To retake them after the screens change:
 4. Save as WebP, quality about 82, with the widths used now.
 5. Update the `width` and `height` on each `<img>`. `HomePageTest` checks that they match the files and that each image has alt text.
 
+## Ads
+
+Meta's pixel ([decision 49](Decisions)) runs on the home page, `/pricing`, `/demo` and `/signup` (`MetaPixel::PAGES`), and once, as **CompleteRegistration**, on the admin page a new studio lands on after signing up. Nowhere else: not a studio's pages, members' accounts, sign-in, password resets or the app.
+
+- **Turning it off or changing it:** `config/loft.php` → `marketing.meta_pixel_id`, on in production. Set `META_PIXEL_ID` in Render to another ID, or to empty to turn it off.
+- **Who it skips:** browsers sending Global Privacy Control (`Sec-GPC` and `navigator.globalPrivacyControl`), browsers set to a European time zone (there's no consent banner for the EEA and UK), and browsers that pressed **Don't share my visits with Meta** on the privacy page (the `loft_no_ads` cookie). The site footer links to it as **Your privacy choices**.
+- **Code:** `App\Support\MetaPixel`, `partials/meta-pixel.blade.php`, the platform and admin layouts; tests in `tests/Feature/MetaPixelTest.php`.
+- **In Meta's Events Manager:** leave **automatic advanced matching** off. With it on, the pixel reads email addresses typed into the signup form.
+
 ## Where it lives
 
 | What | Where |

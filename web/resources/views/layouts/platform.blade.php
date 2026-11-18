@@ -3,6 +3,9 @@
 @section('body-class', 'platform')
 
 @section('body')
+@if (\App\Support\MetaPixel::onPage(request()))
+    @push('head')@include('partials.meta-pixel', ['event' => 'PageView'])@endpush
+@endif
 <header class="site-header">
     <div class="container">
         <a class="brand" href="{{ route('home') }}"><x-logo /></a>
@@ -29,7 +32,7 @@
     <div class="container">
         <a class="powered" href="{{ route('home') }}"><x-logo /></a>
         <span>Scheduling, memberships, waivers and billing for studios.</span>
-        <span class="legal-links"><a href="{{ route('pricing') }}">Pricing</a><a href="{{ route('terms') }}">Terms</a><a href="{{ route('privacy') }}">Privacy</a><a href="mailto:{{ config('loft.support_email') }}">Contact</a></span>
+        <span class="legal-links"><a href="{{ route('pricing') }}">Pricing</a><a href="{{ route('terms') }}">Terms</a><a href="{{ route('privacy') }}">Privacy</a><a href="{{ route('privacy') }}#ads">Your privacy choices</a><a href="mailto:{{ config('loft.support_email') }}">Contact</a></span>
         <span>© {{ date('Y') }} {{ config('loft.legal.entity') }}</span>
     </div>
 </footer>

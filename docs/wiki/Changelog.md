@@ -2,6 +2,13 @@
 
 Every change to the web app, newest first. Each links to its pull request. All were merged into `main` and deployed to Render automatically. Dates are UTC.
 
+## In review
+
+- **Meta pixel on Loft's marketing pages** ([decision 49](Decisions), [Home Page](Home-Page#ads))
+  - **Where:** the home page, pricing, the demo page and the page for starting a studio (PageView), and once on the page a new studio lands on (CompleteRegistration). Never on a studio's pages, members' accounts, sign-in, password resets or in the app.
+  - **Who's left out:** browsers sending Global Privacy Control, set to a European time zone, or that pressed **Don't share my visits with Meta** (privacy page; **Your privacy choices** in the site footer).
+  - **Privacy Policy** (now dated November 18): what the pixel collects, where it runs and doesn't, sharing with Meta, the `_fbp` cookie, and how to opt out.
+
 ## 2026-11-17
 
 - **Text messages** ([decision 48](Decisions), [Text Messages](Text-Messages), [#47](https://github.com/CyberpunkAidy/loft-studio/pull/47))

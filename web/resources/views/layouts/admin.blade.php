@@ -1,6 +1,10 @@
 @extends('layouts.base')
 
 @section('body')
+@if (session(\App\Support\MetaPixel::EVENT_FLASH) && \App\Support\MetaPixel::allowed(request()))
+    {{-- Counts a new studio once, on the page it lands on (decision 49). --}}
+    @push('head')@include('partials.meta-pixel', ['event' => session(\App\Support\MetaPixel::EVENT_FLASH), 'conversionOnly' => true])@endpush
+@endif
 @php
     $me = auth()->user();
     $isAdmin = $me->hasRoleIn($studio, 'admin');
