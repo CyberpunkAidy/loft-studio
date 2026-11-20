@@ -89,6 +89,9 @@
         @endauth
     </div>
     <p class="hero-note"><span><x-icon name="check" /> Free for {{ $trialDays }} days</span><span><x-icon name="check" /> No card needed</span><span><x-icon name="check" /> Cancel any time</span></p>
+    @guest
+        @include('platform._send-link', ['page' => 'home'])
+    @endguest
 
     <div class="hero-shots">
         <figure class="shot shot-browser">

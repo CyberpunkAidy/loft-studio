@@ -4,7 +4,7 @@
 
 @section('body')
 @if (\App\Support\MetaPixel::onPage(request()))
-    @push('head')@include('partials.meta-pixel', ['event' => 'PageView'])@endpush
+    @push('head')@include('partials.meta-pixel', ['pageView' => true, 'events' => \App\Support\MetaPixel::pull(request())])@endpush
 @endif
 <header class="site-header">
     <div class="container">

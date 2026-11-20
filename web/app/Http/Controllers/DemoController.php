@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\Demo\DemoStudios;
+use App\Support\MetaPixel;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -36,6 +37,7 @@ class DemoController extends Controller
         $request->session()->invalidate();
         Auth::login($demo['owner'], true);
         $request->session()->regenerate();
+        MetaPixel::queue($request, 'Lead', ['content_name' => 'demo']); // for Loft's ads (decision 50)
 
         return redirect()->route('studio.admin.dashboard', ['studio' => $demo['studio']])
             ->with('success', 'This is your own demo studio, with a month of classes, members and sales. Change anything you like.')

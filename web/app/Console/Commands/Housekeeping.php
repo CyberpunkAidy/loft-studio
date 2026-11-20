@@ -6,6 +6,7 @@ use App\Listeners\StudioEmails;
 use App\Listeners\StudioTexts;
 use App\Models\Booking;
 use App\Models\Entitlement;
+use App\Models\Lead;
 use App\Models\Studio;
 use App\Services\Automations;
 use App\Services\ChurnScores;
@@ -68,11 +69,12 @@ class Housekeeping extends Command
         $billingEmails = $billing->remind();
         $renewals = $invitations->remindRenewals();
         $pruned = $imports->prune();
+        $leadsDeleted = Lead::where('created_at', '<', now()->subDays(Lead::KEEP_DAYS))->delete(); // decision 50
         $demosRemoved = $demos->cleanup();
         $demosBuilt = $demos->refill();
         $relayed = $events->relay();
 
-        $this->info("Reminders: {$reminders}. Expired: {$expired}. Credit warnings: {$warnings}. Snapshots: {$snapshotted}. Risk scores: {$scored}. Automated emails: {$automated}. Shop orders settled: {$shopOrders}. Series sign-ups settled: {$seriesSignups}. Reader sales settled: {$readerSales}. Videos finished: {$videosDone}. Subscriptions synced: {$subscriptions}. Billing emails: {$billingEmails}. Renewal reminders: {$renewals}. Import drafts cleared: {$pruned}. Events relayed: {$relayed}. Demo studios removed: {$demosRemoved}. Spare demos built: {$demosBuilt}.");
+        $this->info("Reminders: {$reminders}. Expired: {$expired}. Credit warnings: {$warnings}. Snapshots: {$snapshotted}. Risk scores: {$scored}. Automated emails: {$automated}. Shop orders settled: {$shopOrders}. Series sign-ups settled: {$seriesSignups}. Reader sales settled: {$readerSales}. Videos finished: {$videosDone}. Subscriptions synced: {$subscriptions}. Billing emails: {$billingEmails}. Renewal reminders: {$renewals}. Import drafts cleared: {$pruned}. Link requests deleted: {$leadsDeleted}. Events relayed: {$relayed}. Demo studios removed: {$demosRemoved}. Spare demos built: {$demosBuilt}.");
 
         return self::SUCCESS;
     }

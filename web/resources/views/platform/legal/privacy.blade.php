@@ -45,6 +45,7 @@
             <li><strong>Waivers:</strong> when you sign one, your typed name, your relationship to the person it covers, the drawing of your signature, the exact version of the text, and the time.</li>
             <li><strong>Studios:</strong> if you run a studio, its name, address, settings and branding; the classes, plans, products and videos you add; your staff’s names and emails; and, when you start it, how you heard about Loft and any referral code you used.</li>
             <li><strong>Messages to us:</strong> anything you send when you contact us.</li>
+            <li id="links"><strong>A link you ask for:</strong> if you ask us to email you a link to Loft (“Email me the link”, on a phone), your email address, when you asked, the page you asked on, where your visit began (as for a new studio, below), and whether you said we could email you about Loft later. We use it to send the link, to see whether you come back and start a studio, and to follow up only if you said we could. We delete it {{ \App\Models\Lead::KEEP_DAYS }} days after you asked.</li>
         </ul>
         <h3>Created as you use Loft</h3>
         <ul>
@@ -111,7 +112,7 @@
         <h2>6. Cookies</h2>
         <p>Loft uses only the cookies it needs to work: one that keeps you signed in during a visit, one that protects forms from forgery, and, if you choose “remember me”, one that keeps you signed in on that device until you sign out. If you follow a referral link, one more remembers its code for 30 days, so the form for starting a studio can fill it in. The video player is set to use none. The mobile app keeps your sign-in in your phone’s secure storage. Loft’s own marketing pages also load Meta’s pixel, which sets an advertising cookie (<a href="#ads">below</a>); a studio’s pages, where members book and pay, never do.</p>
         <h3 id="ads">Advertising on Loft’s own pages</h3>
-        <p>On loftstudio.app’s home page, pricing page, demo page and the page for starting a studio, Meta’s pixel tells Meta that someone visited, from which browser and IP address, and sets a cookie (<code>_fbp</code>) so Meta can recognise the browser later. When someone starts a studio, the next page tells Meta once that a studio signed up. We use this to measure our ads and show them to people who run studios. Meta may combine it with what it already knows about you, under its own privacy policy. It’s never loaded on a studio’s pages (schedule, booking, payments, waivers, accounts), in the admin, or in the app.</p>
+        <p>On loftstudio.app’s home page, pricing page, demo page and the page for starting a studio, Meta’s pixel tells Meta that someone visited, from which browser and IP address, and sets a cookie (<code>_fbp</code>) so Meta can recognise the browser later. When someone starts a studio, starts the demo or asks for a link to Loft, the next page tells Meta once that it happened (not their email or anything they typed). We use this to measure our ads and show them to people who run studios. Meta may combine it with what it already knows about you, under its own privacy policy. It’s never loaded on a studio’s pages (schedule, booking, payments, waivers, accounts), in the admin, or in the app.</p>
         <p>It doesn’t load if your browser sends a Global Privacy Control signal, or is set to a time zone in Europe. You can also turn it off for this browser:</p>
         @if (\App\Support\MetaPixel::optedOut(request()))
             <p><strong>It’s off for this browser.</strong> Loft’s pages won’t load Meta’s pixel here. Clearing your cookies turns it back on.</p>
@@ -129,6 +130,7 @@
             <li><strong>Some records stay with each studio</strong>, without a link to your account, because they’re the studio’s business records: signed waivers (with the names, signature drawing, IP address and browser), sales and payments it recorded, and its payment history in its own Stripe account.</li>
             <li><strong>When a studio closes</strong>, everything in it is deleted, including its signed waivers, which its owner can download first.</li>
             <li><strong>Demo studios</strong> (from “Try the demo”) are deleted with everything in them, including any accounts made inside them, a day after they’re opened.</li>
+            <li><strong>Links you asked for</strong> are kept for {{ \App\Models\Lead::KEEP_DAYS }} days, then deleted.</li>
             <li><strong>Files a studio uploads to import its members</strong> are kept only until they’re imported; unused uploads are deleted after a week.</li>
             <li><strong>Backups and server logs</strong> are kept by our host for a limited time and then overwritten.</li>
         </ul>
