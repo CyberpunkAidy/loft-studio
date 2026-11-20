@@ -2,9 +2,9 @@
 
 Every change to the web app, newest first. Each links to its pull request. All were merged into `main` and deployed to Render automatically. Dates are UTC.
 
-## In review
+## 2026-11-20
 
-- **"Email me the link" for phone visitors, and Meta events for demos** ([decision 50](Decisions), [Home Page](Home-Page#email-me-the-link))
+- **"Email me the link" for phone visitors, and Meta events for demos** ([decision 50](Decisions), [Home Page](Home-Page#email-me-the-link), [#49](https://github.com/CyberpunkAidy/loft-studio/pull/49))
   - **On phones only,** on the home page and the demo page: "On your phone? Try it on your computer." One email with the demo and the free trial; at most once a day per address; replies go to support.
   - **Kept 90 days** in `leads`, with where the visit began (ad tags), an optional "you can email me about Loft later", and the studio they start. `php artisan loft:leads` lists them.
   - **Meta:** Lead once when someone starts the demo (`content_name` demo) or asks for the link (email_link), as well as CompleteRegistration for a new studio.
