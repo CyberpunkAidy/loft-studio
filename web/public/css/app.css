@@ -218,6 +218,34 @@ form.inline { display: inline; }
 .table select.input { min-height: 2.2rem; padding-top: .3rem; padding-bottom: .3rem; }
 .email-preview { border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem 1.1rem; background: var(--surface-2); }
 .email-preview p { margin: 0 0 .6rem; }
+/* /owners: the page ads point to. Phone first: one column, the next step near the top. */
+.owners-hero { text-align: center; padding: 2rem 0 0; }
+.owners-hero h1 { font-size: clamp(2.3rem, 6vw, 4rem); line-height: 1.04; letter-spacing: -.045em; font-weight: 700; margin: 1rem auto; max-width: 14ch; }
+.owners-hero .lead { margin: 0 auto; max-width: 38rem; }
+.owners-hero .actions { justify-content: center; margin-top: 1.5rem; }
+.owners-hero .hero-note { justify-content: center; }
+.owners-points { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; margin: 3rem 0 0; }
+.owners-point { display: flex; flex-direction: column; justify-content: space-between; gap: 1.25rem; padding: 1.4rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); overflow: hidden; }
+.owners-point h2 { font-size: 1.35rem; letter-spacing: -.03em; font-weight: 700; margin: .9rem 0 .4rem; }
+.owners-point p { margin: 0; color: var(--ink-2); }
+.owners-point .shot { box-shadow: var(--shadow-sm); }
+.owners-phone { width: min(210px, 70%); align-self: center; }
+.owners-price { max-width: 40rem; margin: 3rem auto 0; text-align: center; padding: clamp(1.5rem, 4vw, 2.25rem); }
+.owners-price h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); letter-spacing: -.035em; font-weight: 700; margin: 0; }
+.owners-price .ticks { align-items: center; }
+.owners-price .actions { justify-content: center; margin-top: 1.5rem; }
+.owners-faq { margin: 3rem 0 1rem; text-align: center; }
+.owners-faq h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); letter-spacing: -.035em; font-weight: 700; margin-bottom: 1.25rem; }
+.owners-faq .faq-list { text-align: left; }
+.owners-faq > p { margin-top: 1.25rem; }
+@media (max-width: 760px) {
+	.owners-hero { padding-top: 1rem; }
+	.owners-hero .actions { flex-direction: column; align-items: stretch; }
+	.owners-points { grid-template-columns: minmax(0, 1fr); margin-top: 2rem; }
+	.owners-point { padding: 1.15rem; }
+	.owners-price .ticks { align-items: flex-start; text-align: left; }
+	.owners-price .actions { flex-direction: column; align-items: stretch; }
+}
 /* "Email me a link for my computer" (decision 50): phones only. */
 .send-link { display: none; }
 @media (max-width: 760px) {

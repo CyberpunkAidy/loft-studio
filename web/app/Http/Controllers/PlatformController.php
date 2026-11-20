@@ -30,6 +30,12 @@ class PlatformController extends Controller
         return $found ? $home->withCookie(cookie(Referrals::COOKIE, $found->code, Referrals::COOKIE_DAYS * 24 * 60)) : $home;
     }
 
+    /** loftstudio.app/owners: the page ads point to, for studio owners, phone first. */
+    public function owners(StudioBilling $billing): View
+    {
+        return view('platform.owners', $this->marketing($billing));
+    }
+
     /** The price of Loft for a studio (decisions 36 and 40): monthly or yearly, locked while subscribed. */
     public function pricing(StudioBilling $billing): View
     {

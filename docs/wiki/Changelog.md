@@ -2,6 +2,12 @@
 
 Every change to the web app, newest first. Each links to its pull request. All were merged into `main` and deployed to Render automatically. Dates are UTC.
 
+## In review
+
+- **Ad landing page** ([Home Page](Home-Page#the-ad-landing-page-owners))
+  - **`loftstudio.app/owners`:** for studio owners, phone first. The pitch and price, **See it with a sample studio** and **Start free for 30 days**, then **Email me the link** on phones, four short points with screenshots, the price again, and three questions.
+  - **Not in search results.** Meta's pixel runs on it, and the Privacy Policy lists it with the other pages that load the pixel.
+
 ## 2026-11-20
 
 - **"Email me the link" for phone visitors, and Meta events for demos** ([decision 50](Decisions), [Home Page](Home-Page#email-me-the-link), [#49](https://github.com/CyberpunkAidy/loft-studio/pull/49))

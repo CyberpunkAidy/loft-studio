@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 final class MetaPixel
 {
     /** The marketing pages it runs on (route names). Not sign-in, password resets or the studio list. */
-    public const PAGES = ['home', 'pricing', 'demo', 'signup'];
+    public const PAGES = ['home', 'owners', 'pricing', 'demo', 'signup'];
 
     /** Set by "Don't share my visits with Meta" on the privacy page. */
     public const OPT_OUT_COOKIE = 'loft_no_ads';

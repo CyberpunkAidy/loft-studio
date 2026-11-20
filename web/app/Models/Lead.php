@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 #[Fillable(['email', 'page', 'signup_source', 'follow_up_consent_at', 'link_sent_at', 'studio_id', 'converted_at'])]
 class Lead extends Model
 {
-    public const PAGES = ['home', 'demo'];
+    public const PAGES = ['home', 'demo', 'owners'];
 
     /** Deleted this long after they asked (App\Console\Commands\Housekeeping). */
     public const KEEP_DAYS = 90;

@@ -28,7 +28,7 @@ class SendLinkController extends Controller
             'page' => ['required', Rule::in(Lead::PAGES)],
             'follow_up' => ['nullable', 'boolean'],
         ], [], ['link_email' => 'email']);
-        $back = redirect()->to(route($data['page'] === 'demo' ? 'demo' : 'home').'#send-link');
+        $back = redirect()->to(route($data['page']).'#send-link'); // Lead::PAGES are route names
         if ($request->filled('website')) { // honeypot
             return $back->with('link_sent', true);
         }

@@ -49,7 +49,7 @@ To retake them after the screens change:
 
 ## Ads
 
-Meta's pixel ([decision 49](Decisions)) runs on the home page, `/pricing`, `/demo` and `/signup` (`MetaPixel::PAGES`), sending PageView. Nowhere else: not a studio's pages, members' accounts, sign-in, password resets or the app.
+Meta's pixel ([decision 49](Decisions)) runs on the home page, `/owners`, `/pricing`, `/demo` and `/signup` (`MetaPixel::PAGES`), sending PageView. Nowhere else: not a studio's pages, members' accounts, sign-in, password resets or the app.
 
 Events, each sent once on the next page that loads the pixel (`MetaPixel::queue()`, held in the session):
 
@@ -66,9 +66,22 @@ For ads, sign-ups are too rare for Meta to learn from; aim campaigns at **Lead**
 - **Code:** `App\Support\MetaPixel`, `partials/meta-pixel.blade.php`, the platform and admin layouts; tests in `tests/Feature/MetaPixelTest.php`.
 - **In Meta's Events Manager:** leave **automatic advanced matching** off. With it on, the pixel reads email addresses typed into the signup form.
 
+## The ad landing page (`/owners`)
+
+Where ads should point: `https://loftstudio.app/owners`, with the ad's tags (Larven adds `utm_*`). It's for studio owners, phone first, with one next step:
+
+1. **"For aerial and pole studio owners"**, a one-line pitch with the price, and two buttons: **See it with a sample studio** (the demo) and **Start free for 30 days**. On phones the buttons fill the width, and **Email me the link** comes right after them.
+2. **Four short points**, each with a screenshot: apparatus booking and waitlists, waivers and injury questions, paid into your own Stripe account (and Loft's fee, if any), and free switching.
+3. **The price**, with the same two buttons.
+4. **Three questions owners ask**, and the support email.
+
+- **Not in search results** (`noindex`): it's for ad visitors, and the home page is the one to find.
+- **Same numbers as the home page:** `PlatformController::marketing`.
+- **Code:** `platform/owners.blade.php`, styles under "/owners" in `public/css/app.css`, tests in `tests/Feature/OwnersPageTest.php`.
+
 ## Email me the link
 
-Phone visitors (`max-width: 760px`; hidden on bigger screens) see **On your phone? Try it on your computer.** on the home page and the demo page ([decision 50](Decisions)): an email box, **Email me the link**, and an unticked **You can also email me about Loft later (optional)**.
+Phone visitors (`max-width: 760px`; hidden on bigger screens) see **On your phone? Try it on your computer.** on the home page, `/owners` and the demo page ([decision 50](Decisions)): an email box, **Email me the link**, and an unticked **You can also email me about Loft later (optional)**.
 
 - **The email** (`App\Mail\LoftLink`, `mail/loft-link`): **Try the demo**, **Start your free trial**, the price and trial, and "reply and a person will answer" (Reply-To is `loft.support_email`). Its links carry `utm_source=loft&utm_medium=email&utm_campaign=send_link`, so a studio that starts from it says so in `loft:signups`.
 - **Once a day per address:** asking again within 24 hours records the request but sends nothing. The page always answers "Sent", so the form can't be used to check or flood addresses; it's also limited to 5 tries an hour per visitor, with a hidden field for bots.
