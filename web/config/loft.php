@@ -123,7 +123,7 @@ return [
 
     'reserved_slugs' => [
         'admin', 'api', 'app', 'account', 'billing', 'blog', 'css', 'dashboard', 'docs', 'favicon', 'forgot-password',
-        'demo', 'help', 'home', 'images', 'img', 'js', 'join', 'login', 'logout', 'mail', 'platform', 'pricing', 'privacy',
+        'demo', 'help', 'home', 'images', 'img', 'js', 'join', 'login', 'logout', 'mail', 'owners', 'platform', 'pricing', 'privacy',
         'register', 'reset-password', 'robots', 'send-link', 'signup', 'static', 'storage', 'stripe', 'studios', 'support', 'twilio',
         'terms', 'up', 'www',
     ],

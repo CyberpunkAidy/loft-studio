@@ -20,7 +20,7 @@ class MetaPixelTest extends TestCase
 
     public function test_it_runs_on_the_marketing_pages_only(): void
     {
-        foreach (['/', '/pricing', '/demo', '/signup'] as $page) {
+        foreach (['/', '/owners', '/pricing', '/demo', '/signup'] as $page) {
             $this->get($page)->assertOk()->assertSee(self::SCRIPT, false)
                 ->assertSee('fbq(\'init\', "'.self::ID.'");', false)->assertSee('fbq(\'track\', "PageView");', false)
                 ->assertDontSee('autoConfig', false);

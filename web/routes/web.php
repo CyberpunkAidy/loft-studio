@@ -26,6 +26,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 */
 Route::get('/', [PlatformController::class, 'home'])->name('home');
 Route::get('/pricing', [PlatformController::class, 'pricing'])->name('pricing');
+Route::get('/owners', [PlatformController::class, 'owners'])->name('owners'); // where ads point
 Route::get('/terms', [PlatformController::class, 'terms'])->name('terms');
 Route::get('/privacy', [PlatformController::class, 'privacy'])->name('privacy');
 // "Email me a link for my computer", for phone visitors (decision 50).
