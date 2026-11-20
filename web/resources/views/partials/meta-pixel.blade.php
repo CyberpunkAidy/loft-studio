@@ -1,9 +1,12 @@
 {{--
-    Meta's pixel (decision 49), only where App\Support\MetaPixel allows it. $event: the event to
-    send (PageView on marketing pages, CompleteRegistration after starting a studio). $conversionOnly:
-    the page isn't a marketing page, so automatic button and page details are switched off.
+    Meta's pixel (decisions 49 and 50), only where App\Support\MetaPixel allows it. $pageView: send
+    PageView (marketing pages). $events: [name, params] pairs waiting from the last request (a sign-up,
+    a demo started, a link asked for). $conversionOnly: not a marketing page (a new studio's or a demo's
+    admin), so automatic button and page details are switched off.
 --}}
 @php
+    $pageView ??= false;
+    $events ??= [];
     $conversionOnly ??= false;
 @endphp
 <!-- Meta Pixel Code -->
@@ -26,7 +29,12 @@
     fbq('set', 'autoConfig', false, @json(\App\Support\MetaPixel::id()));
     @endif
     fbq('init', @json(\App\Support\MetaPixel::id()));
-    fbq('track', @json($event));
+    @if ($pageView)
+    fbq('track', "PageView");
+    @endif
+    @foreach ($events as [$name, $params])
+    fbq('track', @json($name){!! $params ? ', '.json_encode($params, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) : '' !!});
+    @endforeach
 })();
 </script>
 <!-- End Meta Pixel Code -->

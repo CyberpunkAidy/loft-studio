@@ -73,7 +73,7 @@ return [
         'state' => env('LOFT_LEGAL_STATE', 'Wyoming'),
         'email' => env('LOFT_LEGAL_EMAIL', 'privacy@loftstudio.app'),
         'terms_version' => '2026-11-13',
-        'privacy_version' => '2026-11-18',
+        'privacy_version' => '2026-11-20',
     ],
 
     /*
@@ -124,7 +124,7 @@ return [
     'reserved_slugs' => [
         'admin', 'api', 'app', 'account', 'billing', 'blog', 'css', 'dashboard', 'docs', 'favicon', 'forgot-password',
         'demo', 'help', 'home', 'images', 'img', 'js', 'join', 'login', 'logout', 'mail', 'platform', 'pricing', 'privacy',
-        'register', 'reset-password', 'robots', 'signup', 'static', 'storage', 'stripe', 'studios', 'support', 'twilio',
+        'register', 'reset-password', 'robots', 'send-link', 'signup', 'static', 'storage', 'stripe', 'studios', 'support', 'twilio',
         'terms', 'up', 'www',
     ],
 

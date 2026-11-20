@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\StudioSignupController;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\PlatformController;
+use App\Http\Controllers\SendLinkController;
 use App\Http\Controllers\StripeWebhookController;
 use App\Http\Controllers\Studio;
 use App\Http\Controllers\StudioBillingWebhookController;
@@ -27,6 +28,8 @@ Route::get('/', [PlatformController::class, 'home'])->name('home');
 Route::get('/pricing', [PlatformController::class, 'pricing'])->name('pricing');
 Route::get('/terms', [PlatformController::class, 'terms'])->name('terms');
 Route::get('/privacy', [PlatformController::class, 'privacy'])->name('privacy');
+// "Email me a link for my computer", for phone visitors (decision 50).
+Route::post('/send-link', SendLinkController::class)->middleware('throttle:5,60')->name('send-link');
 Route::post('/privacy/ads', [PlatformController::class, 'adsOptOut'])->middleware('throttle:20,1')->name('privacy.ads');
 // "Try the demo" (decision 44): the visitor's own copy of the sample studio for a day.
 Route::get('/demo', [DemoController::class, 'show'])->name('demo');

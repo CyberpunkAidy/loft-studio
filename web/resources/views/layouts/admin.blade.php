@@ -1,9 +1,9 @@
 @extends('layouts.base')
 
 @section('body')
-@if (session(\App\Support\MetaPixel::EVENT_FLASH) && \App\Support\MetaPixel::allowed(request()))
-    {{-- Counts a new studio once, on the page it lands on (decision 49). --}}
-    @push('head')@include('partials.meta-pixel', ['event' => session(\App\Support\MetaPixel::EVENT_FLASH), 'conversionOnly' => true])@endpush
+@if (\App\Support\MetaPixel::allowed(request()) && ($pixelEvents = \App\Support\MetaPixel::pull(request())))
+    {{-- A new studio, or a demo started, counted once on the page it lands on (decisions 49 and 50). --}}
+    @push('head')@include('partials.meta-pixel', ['events' => $pixelEvents, 'conversionOnly' => true])@endpush
 @endif
 @php
     $me = auth()->user();

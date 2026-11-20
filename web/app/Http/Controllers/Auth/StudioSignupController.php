@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Lead;
 use App\Models\ReferralCode;
 use App\Models\Studio;
 use App\Models\User;
@@ -127,9 +128,11 @@ class StudioSignupController extends Controller
             $request->session()->regenerate();
         }
 
+        MetaPixel::queue($request, 'CompleteRegistration'); // counted once for Loft's ads (decision 49)
+        Lead::where('email', strtolower($user->email))->whereNull('studio_id')->update(['studio_id' => $studio->id, 'converted_at' => now()]);
+
         return redirect()->route('studio.admin.dashboard', ['studio' => $studio])
             ->with('success', "Welcome to {$studio->name}! Work through the checklist below to start taking bookings.")
-            ->with(MetaPixel::EVENT_FLASH, 'CompleteRegistration') // counted once for Loft's ads (decision 49)
             ->withoutCookie(Referrals::COOKIE);
     }
 

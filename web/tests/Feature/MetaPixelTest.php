@@ -64,7 +64,7 @@ class MetaPixelTest extends TestCase
         $this->post('/signup', [
             'first_name' => 'Olivia', 'last_name' => 'Owens', 'email' => 'olivia@example.com', 'password' => 'long-enough',
             'studio_name' => 'Skyline Aerial', 'slug' => 'skyline', 'timezone' => 'America/Denver', 'currency' => 'usd', 'terms' => '1', 'heard_from' => 'search',
-        ])->assertRedirect('/skyline/admin')->assertSessionHas(MetaPixel::EVENT_FLASH, 'CompleteRegistration');
+        ])->assertRedirect('/skyline/admin')->assertSessionHas(MetaPixel::SESSION, [['CompleteRegistration', []]]);
 
         $this->get('/skyline/admin')->assertOk()
             ->assertSee('fbq(\'track\', "CompleteRegistration");', false)

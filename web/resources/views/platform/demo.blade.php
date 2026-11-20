@@ -29,6 +29,9 @@
         @endif
         <p class="small muted" style="margin:.9rem 0 0">No sign-up needed.@auth @unless (auth()->user()->isDemo()) Opening the demo signs you out of your account here. @endunless @endauth</p>
     </div>
+    @if (! $current && ! auth()->check())
+        @include('platform._send-link', ['page' => 'demo'])
+    @endif
     <p class="small muted" style="text-align:center;margin-top:1.25rem">Ready for the real thing? <a href="{{ route('signup') }}">Start your studio</a>: free for {{ (int) config('loft.billing.trial_days') }} days, no card needed.</p>
 </div>
 @endsection

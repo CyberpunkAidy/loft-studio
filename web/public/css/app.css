@@ -218,6 +218,19 @@ form.inline { display: inline; }
 .table select.input { min-height: 2.2rem; padding-top: .3rem; padding-bottom: .3rem; }
 .email-preview { border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem 1.1rem; background: var(--surface-2); }
 .email-preview p { margin: 0 0 .6rem; }
+/* "Email me a link for my computer" (decision 50): phones only. */
+.send-link { display: none; }
+@media (max-width: 760px) {
+	.send-link { display: block; margin: 1.5rem auto 0; max-width: 34rem; text-align: left; padding: 1rem 1.1rem; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--surface); box-shadow: var(--shadow-sm); }
+	.send-link h2 { font-size: 1.05rem; margin: 0 0 .3rem; }
+	.send-link > p { margin: 0 0 .7rem; font-size: .92rem; color: var(--muted); }
+	.send-link .form { gap: .6rem; }
+	.send-link-row { display: flex; gap: .5rem; flex-wrap: wrap; }
+	.send-link-row .input { flex: 1 1 12rem; min-width: 0; }
+	.send-link-row .btn { flex: 0 0 auto; }
+	.send-link-done { display: flex; gap: .55rem; align-items: flex-start; margin: 0; }
+	.send-link-done .icon { color: var(--ok); flex-shrink: 0; margin-top: .15rem; }
+}
 /* Admin → Text messages: setup steps, and the registration answers to copy. */
 .steps-list { margin: 0 0 1.1rem; padding-left: 1.3rem; display: grid; gap: .45rem; }
 .registration > summary { cursor: pointer; }

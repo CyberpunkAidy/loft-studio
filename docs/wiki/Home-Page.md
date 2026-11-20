@@ -49,12 +49,31 @@ To retake them after the screens change:
 
 ## Ads
 
-Meta's pixel ([decision 49](Decisions)) runs on the home page, `/pricing`, `/demo` and `/signup` (`MetaPixel::PAGES`), and once, as **CompleteRegistration**, on the admin page a new studio lands on after signing up. Nowhere else: not a studio's pages, members' accounts, sign-in, password resets or the app.
+Meta's pixel ([decision 49](Decisions)) runs on the home page, `/pricing`, `/demo` and `/signup` (`MetaPixel::PAGES`), sending PageView. Nowhere else: not a studio's pages, members' accounts, sign-in, password resets or the app.
+
+Events, each sent once on the next page that loads the pixel (`MetaPixel::queue()`, held in the session):
+
+| Event | When | Where it's sent |
+|---|---|---|
+| CompleteRegistration | A studio signed up | The new studio's first admin page (automatic details off) |
+| Lead, `content_name` `demo` | Someone started the demo ([decision 50](Decisions)) | The demo's first admin page (automatic details off) |
+| Lead, `content_name` `email_link` | Someone asked for the link (below) | The page they come back to |
+
+For ads, sign-ups are too rare for Meta to learn from; aim campaigns at **Lead** and judge them on sign-ups.
 
 - **Turning it off or changing it:** `config/loft.php` → `marketing.meta_pixel_id`, on in production. Set `META_PIXEL_ID` in Render to another ID, or to empty to turn it off.
 - **Who it skips:** browsers sending Global Privacy Control (`Sec-GPC` and `navigator.globalPrivacyControl`), browsers set to a European time zone (there's no consent banner for the EEA and UK), and browsers that pressed **Don't share my visits with Meta** on the privacy page (the `loft_no_ads` cookie). The site footer links to it as **Your privacy choices**.
 - **Code:** `App\Support\MetaPixel`, `partials/meta-pixel.blade.php`, the platform and admin layouts; tests in `tests/Feature/MetaPixelTest.php`.
 - **In Meta's Events Manager:** leave **automatic advanced matching** off. With it on, the pixel reads email addresses typed into the signup form.
+
+## Email me the link
+
+Phone visitors (`max-width: 760px`; hidden on bigger screens) see **On your phone? Try it on your computer.** on the home page and the demo page ([decision 50](Decisions)): an email box, **Email me the link**, and an unticked **You can also email me about Loft later (optional)**.
+
+- **The email** (`App\Mail\LoftLink`, `mail/loft-link`): **Try the demo**, **Start your free trial**, the price and trial, and "reply and a person will answer" (Reply-To is `loft.support_email`). Its links carry `utm_source=loft&utm_medium=email&utm_campaign=send_link`, so a studio that starts from it says so in `loft:signups`.
+- **Once a day per address:** asking again within 24 hours records the request but sends nothing. The page always answers "Sent", so the form can't be used to check or flood addresses; it's also limited to 5 tries an hour per visitor, with a hidden field for bots.
+- **What's kept** (`leads`, 90 days, deleted by the housekeeping run): the address, the page, where the visit began (ad tags), the follow-up box, and the studio if they start one with the same email.
+- **Seeing them:** `php artisan loft:leads` (`--days=90`) in Render's shell: who asked, from which ad, whether they started a studio, and who said you can follow up. Only email those who said yes.
 
 ## Where it lives
 
